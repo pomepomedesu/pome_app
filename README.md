@@ -1,24 +1,65 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column        | Type   | Options                        |
+| ------------- | ------ | ------------------------------ |
+| name          | string | null: false                    |
+| email         | string | null: false                    |
+| password      | string | null: false                    |
+| like_color_id | integer| null: false, foreign_key: true |
+| a_word        | string | null: false                    |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :pomes
+- has_many :comments
 
-* Configuration
+## pomes テーブル
 
-* Database creation
+| Column   | Type       | Options                        |
+| -------- | ------     | ------------------------------ |
+| user     | references | null: false, foreign_key: true |
+| writings | text       | null: false                    | 
+| name     | string     | null: false                    |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_many :comments
+- has_many :tags, through: pome_tags
+- belongs_to :user
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## pome_tags テーブル
 
-* ...
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| pome   | references | null: false, foreign_key: true |
+| tag    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :pomes
+- belongs_to :tags
+
+##  commentsテーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| content | string     |                                |
+| user    | references | null: false, foreign_key: true |
+| pome    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :pomes
+- belongs_to :user
+
+## tagsテーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| name    | string     | null: false,uniqueness: true   |
+
+- has_many :pomes
+- has_many :pome_tags
