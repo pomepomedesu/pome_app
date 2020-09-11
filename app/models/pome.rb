@@ -1,0 +1,2 @@
+class Pome < ApplicationRecord
+end

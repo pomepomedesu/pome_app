@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+<<<<<<< Updated upstream:app/assets/stylesheets/application.css
+=======
+ @import "bootstrap";
+
+ .container-signin {
+  @extend .container-fluid;
+  max-width: 576px;
+  padding: 2rem;
+}
+
+
+// 「ログインしました」などのフラッシュ用スタイル
+
+.alert-notice {
+  @extend .alert-info;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+}
+
+
+>>>>>>> Stashed changes:app/assets/stylesheets/application.scss
