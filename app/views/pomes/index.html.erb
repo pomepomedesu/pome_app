@@ -38,10 +38,15 @@
   </div>
   <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container d-flex justify-content-between">
-      <a href="#" class="navbar-brand d-flex align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-        <!-- <strong>Album</strong> -->
+      <a href="users/edit" class="navbar-brand d-flex align-items-center">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+        </svg>
+        <% if user_signed_in? %>
+        <strong><%= current_user.name %></strong>
+        <% else %>
         <strong>ポメ</strong>
+        <% end %>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -60,7 +65,7 @@
       <p class="lead text-muted">可愛いポメラニアンを投稿しよう！</p>
       <p>
         <% if user_signed_in? %>
-          <a href="#" class="btn btn-primary my-2">投稿する</a>
+          <a href="pomes/new" class="btn btn-primary my-2">投稿する</a>
           <%= link_to "ログアウト", destroy_user_session_path,method: :delete, class: "btn btn-primary my-2" %>
         <% else %>
           <!-- <a href="#" class="btn btn-primary my-2">Main call to action</a> -->
@@ -77,34 +82,34 @@
         <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
         <input class="form-control mr-sm-2" type="text" placeholder="検索" aria-label="Search">
         <br>
-        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+        <div class="center">
         <button class="btn btn-success" type="submit">検索</button>
+        </div>
   </form>
 
   <div class="album py-5">
     <div class="container">
       <div class="row">
+      <% @pomes.each do |pome|%>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" src="/assets/F0F3327B-CB19-493F-83E1-C78D956BDCF1.jpeg" alt="Card image cap">
+            <%= image_tag pome.image, class: "card-img-top" %>
             <div class="card-body">
-              <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-              <p class="card-text">白ポメです</p>
+              <p class="card-text"><%= pome.name %></p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <!-- <button type="button" class="btn btn-sm btn-outline-secondary">View</button> -->
-                  <button type="button" class="btn btn-sm btn-outline-secondary">詳細</button>
-                  <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
-                  <% if user_signed_in? %>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">編集</button>
+                <div class="btn-group">                  
+                  <%= link_to '詳細', pome_path(pome.id), type:"button",class:"btn btn-sm btn-outline-secondary" %>                 
+                  <% if user_signed_in? && current_user.id == pome.user.id %>
+                  <%= link_to '編集', edit_pome_path(pome.id), type:"button", class:"btn btn-sm btn-outline-secondary" %>
+                  <%= link_to '削除', pome_path(pome.id), method: :delete,type:"button", class:"btn btn-sm btn-outline-secondary" %>
                   <% end %>
                 </div>
-                <!-- <small class="text-muted">9 mins</small> -->
-                <small class="text-muted">ポメ</small>
+                <small class="text-muted"><%= pome.user[:name] %></small>
               </div>
             </div>
           </div>
         </div>
+      <% end %>
       </div>
     </div>
   </div>

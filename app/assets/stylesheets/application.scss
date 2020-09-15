@@ -19,15 +19,18 @@
   padding: 2rem;
 }
 
-
-// 「ログインしました」などのフラッシュ用スタイル
-
-.alert-notice {
-  @extend .alert-info;
+.form-style {
+  width: 100%;
+  max-width: 420px;
+  padding: 15px;
+  margin: auto;
 }
 
-.alert-alert {
-  @extend .alert-danger;
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 960px;
 }
 
-
+ 
