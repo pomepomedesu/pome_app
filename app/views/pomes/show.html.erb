@@ -1,4 +1,4 @@
-
+<body style="background-color:	#FFCCFF;">
 <div class="album py-5" style="background-color:	#FFCCFF;">
     <div class="container">
       <div class="row">
@@ -16,7 +16,9 @@
                   <%= link_to '削除', pome_path, method: :delete,type:"button", class:"btn btn-sm btn-outline-secondary" %>
                   <% end %>
                 </div>
-                <small class="text-muted"><%= @pomes.user[:name] %></small>
+                <a href="/users/<%= @pomes.user.id %>">
+                  <small class="text-muted"><%= @pomes.user[:name] %></small>
+                </a>
               </div>
             </div>
           </div>
@@ -27,3 +29,4 @@
     </div>
 </div>
 </div>
+</body>

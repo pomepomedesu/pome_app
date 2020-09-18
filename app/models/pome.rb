@@ -5,4 +5,12 @@ class Pome < ApplicationRecord
   validates :name,  presence: true
   validates :image, presence: true
   validates :writings, presence: true
+
+  def self.search(search)
+    if search != ""
+      Pome.where('name LIKE(?)', "%#{search}%")
+    else  
+      Pome.all
+    end
+  end
 end

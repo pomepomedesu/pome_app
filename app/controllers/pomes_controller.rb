@@ -1,7 +1,10 @@
 class PomesController < ApplicationController
+  before_action :set_pomes, only: [:show,:edit,:update,:destroy]
+  before_action :move_to_index, except: [:index,:show,:search]
+  before_action :redirect_index, except: [:index,:show,:create,:new,:search]
 
   def index
-    @pomes = Pome.all.order("created_at DESC")
+    @pomes = Pome.includes(:user).order("created_at DESC").search(params[:keyword])
   end
 
   def new
@@ -18,15 +21,12 @@ class PomesController < ApplicationController
   end
 
   def show
-    @pomes = Pome.find(params[:id])
   end
 
   def edit
-    @pomes = Pome.find(params[:id])
   end
 
   def update
-    @pomes = Pome.find(params[:id])
     @pomes.update(pomes_params)
     if @pomes.save
       redirect_to root_path
@@ -36,14 +36,33 @@ class PomesController < ApplicationController
   end
 
   def destroy
-    @pomes = Pome.find(params[:id])
     @pomes.destroy
     redirect_to root_path
+  end
+
+  def search
+    @pomes = Pome.search(params[:keyword])
   end
 
   private
 
   def pomes_params
     params.require(:pome).permit(:name,:image,:writings).merge(user_id: current_user.id)
+  end
+
+  def set_pomes
+    @pomes = Pome.find(params[:id])
+  end
+
+  def move_to_index
+    unless user_signed_in?
+      redirect_to root_path
+    end
+  end
+
+  def redirect_index
+    unless user_signed_in? && current_user.id == @pomes.user_id
+      redirect_to root_path
+    end
   end
 end

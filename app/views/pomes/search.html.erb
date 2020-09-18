@@ -79,15 +79,15 @@
   </section>
   
   <form class="container w-50">
-      <%= form_with(url: search_pomes_path, local: true, method: :get) do |f| %>
+      <%= form_with(url: search_pomes_path, local: true, method: :get) do |form| %>
         <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
         <!--<div class="form-group">
-          <%# f.collection_select(:genre_id, Genre.all, :id, :name, {}, {autofocus: true, autocomplete: 'genre_id', class: 'form-control'}) %>
+          <%= form.collection_select(:genre_id, Genre.all, :id, :name, {}, {autofocus: true, autocomplete: 'genre_id', class: 'form-control'}) %>
         </div>-->
-        <%= f.text_field :keyword, placeholder: "検索する", class: "form-control mr-sm-2" %>
+        <%= form.text_field :keyword, placeholder: "検索する", class: "form-control mr-sm-2" %>
         <br>
         <div class="center">
-        <%= f.submit "検索", class:"btn btn-success",type:"submit"%>
+        <%= form.submit "検索", class:"btn btn-success",type:"submit"%>
         </div>
       <% end %>
   </form>
