@@ -4,7 +4,7 @@ class PomesController < ApplicationController
   before_action :redirect_index, except: [:index,:show,:create,:new,:search]
 
   def index
-    @pomes = Pome.includes(:user).order("created_at DESC").search(params[:keyword])
+    @pomes = Pome.includes(:user).order("pomes.created_at DESC").search(params[:keyword])
   end
 
   def new
