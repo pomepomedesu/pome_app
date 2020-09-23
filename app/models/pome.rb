@@ -9,6 +9,7 @@ class Pome < ApplicationRecord
   validates :image, presence: true
   validates :writings, presence: true
   validates :color_pome, presence: true
+  
   def self.search(search)
     if search != ""
       Pome.where('color_pome LIKE(?)', "%#{search}%")

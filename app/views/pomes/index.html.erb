@@ -84,12 +84,9 @@
   
   <form class="container w-50">
       <%= form_with(url: search_pomes_path, local: true, method: :get) do |f| %>
-        <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
         <div class="form-group">
-          <%# f.collection_select(:pome_color, Genre.all, :id, :name, {}, {autofocus: true, autocomplete: 'genre_id', class: 'form-control'}) %>
           <%= select_tag "keyword", options_for_select([['---選択してください---', ''], ["白ポメ", "白ポメ"],["黒ポメ","黒ポメ"],["茶ポメ","茶ポメ"],["オレンジ系ポメ","オレンジ系ポメ"],["クリーム系ポメ","クリーム系ポメ"],["パーティーポメ","パーティーポメ"],["ウルフセーブルポメ","ウルフセーブルポメ"],["ベージュポメ","ベージュポメ"],["その他ポメ","その他ポメ"]]) , class: 'form-control'%>
         </div>
-        <%# f.text_field :keyword, placeholder: "検索する", class: "form-control mr-sm-2" %>
         <br>
         <div class="center">
         <%= f.submit "検索", class:"btn btn-success",type:"submit"%>
@@ -107,8 +104,8 @@
             <div class="card-body">
               <p class="card-text"><%= pome.name %></p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">                  
-                  <%= link_to '詳細', pome_path(pome.id), type:"button",class:"btn btn-sm btn-outline-secondary" %>                 
+                <div class="btn-group">
+                  <%= link_to '詳細', pome_path(pome.id), type:"button",class:"btn btn-sm btn-outline-secondary" %>
                   <% if user_signed_in? && current_user.id == pome.user.id %>
                   <%= link_to '編集', edit_pome_path(pome.id), type:"button", class:"btn btn-sm btn-outline-secondary" %>
                   <%= link_to '削除', pome_path(pome.id), method: :delete,type:"button", class:"btn btn-sm btn-outline-secondary" %>
@@ -147,5 +144,5 @@
 <script src="/docs/4.5/assets/js/src/application.js"></script>
 <script src="/docs/4.5/assets/js/src/search.js"></script>
 <script src="/docs/4.5/assets/js/src/ie-emulation-modes-warning.js"></script>
-  </body>
+</body>
 </html>
