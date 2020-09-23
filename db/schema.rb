@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2020_09_22_025438) do
     t.bigint "user_id", null: false
     t.text "writings", null: false
     t.string "name", null: false
-    t.string "pome_color"
+    t.string "color_pome", null: false
     t.index ["user_id"], name: "index_pomes_on_user_id"
   end
 

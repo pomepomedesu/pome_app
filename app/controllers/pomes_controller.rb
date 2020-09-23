@@ -47,7 +47,7 @@ class PomesController < ApplicationController
   private
 
   def pomes_params
-    params.require(:pome).permit(:name,:image,:writings,:pome_color).merge(user_id: current_user.id)
+    params.require(:pome).permit(:name,:image,:writings,:color_pome).merge(user_id: current_user.id)
   end
 
   def set_pomes

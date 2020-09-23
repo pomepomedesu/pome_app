@@ -8,10 +8,10 @@ class Pome < ApplicationRecord
   validates :name,  presence: true
   validates :image, presence: true
   validates :writings, presence: true
-
+  validates :color_pome, presence: true
   def self.search(search)
     if search != ""
-      Pome.where('pome_color LIKE(?)', "%#{search}%")
+      Pome.where('color_pome LIKE(?)', "%#{search}%")
     else  
       Pome.all
     end
