@@ -41,7 +41,7 @@ class PomesController < ApplicationController
   end
 
   def search
-    @pomes = Pome.search(params[:pome_color])
+    @pomes = Pome.search(params[:keyword])
   end
 
   private
