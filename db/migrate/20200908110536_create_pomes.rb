@@ -5,6 +5,7 @@ class CreatePomes < ActiveRecord::Migration[6.0]
       t.references :user, null: false, forign_keys: true
       t.text       :writings, null: false
       t.string     :name,     null: false
+      t.string     :pome_color
     end
   end
 end
