@@ -29,19 +29,6 @@
 - has_many :tags, through: pome_tags
 - belongs_to :user
 
-
-## pome_tags テーブル
-
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| pome   | references | null: false, foreign_key: true |
-| tag    | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :pomes
-- belongs_to :tags
-
 ##  commentsテーブル
 
 | Column  | Type       | Options                        |
@@ -55,11 +42,4 @@
 - belongs_to :pomes
 - belongs_to :user
 
-## tagsテーブル
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| name    | string     | null: false,uniqueness: true   |
-
-- has_many :pomes
-- has_many :pome_tags

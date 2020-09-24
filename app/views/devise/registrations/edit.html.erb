@@ -12,7 +12,7 @@
   
   <div class="form-group">
     <%= f.label :好きな色のポメ %>
-    <%= f.collection_select(:color_pome, Genre.all, :id, :name, {}, {autofocus: true, autocomplete: 'genre_id', class: 'form-control'}) %>
+    <%= f.collection_select(:genre_id, Genre.all, :id, :name, {}, {autofocus: true, autocomplete: 'genre_id', class: 'form-control'}) %>
   </div>
 
   <div class="form-group">
