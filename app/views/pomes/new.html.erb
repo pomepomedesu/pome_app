@@ -12,8 +12,10 @@
     <div>
     <%= f.label :画像 %>
     </div>
-    <%= f.file_field :image, autocomplete: 'current-password' %>
+    <%= f.file_field :image, id: "pome_image",autocomplete: 'current-password' %>
   </div>
+
+  <div id="image-list" class="image-list"></div>
 
   <div class="form-group">
     <%= f.label :ポメの色 %>
